@@ -1,0 +1,6 @@
+{
+	"LogLevel": "debug",
+	"LogPath": "",
+	"Addr": "127.0.0.1:3563",
+	"MaxConnNum": 20000
+}
