@@ -1,10 +1,13 @@
 package internal
 
 import (
-	"github.com/name5566/leaf/module"
 	"server/base"
 	"server/game"
 )
+
+func init() {
+	game.Module = new(Module)
+}
 
 var skeleton = base.NewSkeleton(game.ChanRPC)
 

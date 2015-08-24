@@ -6,6 +6,10 @@ import (
 	"server/login"
 )
 
+func init() {
+	login.Module = new(Module)
+}
+
 var skeleton = base.NewSkeleton(login.ChanRPC)
 
 type Module struct {
