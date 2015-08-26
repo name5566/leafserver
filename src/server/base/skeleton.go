@@ -6,11 +6,11 @@ import (
 	"server/conf"
 )
 
-func NewSkeleton(chanRPC *chanrpc.Server) *module.Skeleton {
+func NewSkeleton() *module.Skeleton {
 	skeleton := &module.Skeleton{
 		GoLen:              conf.GoLen,
 		TimerDispatcherLen: conf.TimerDispatcherLen,
-		ChanRPCServer:      chanRPC,
+		ChanRPCServer:      chanrpc.NewServer(conf.ChanRPCLen),
 	}
 	skeleton.Init()
 	return skeleton

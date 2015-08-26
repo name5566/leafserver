@@ -5,7 +5,6 @@ import (
 	"github.com/name5566/leaf/log"
 	"server/conf"
 	"server/game"
-	_ "server/gate"
 	"server/msg"
 )
 

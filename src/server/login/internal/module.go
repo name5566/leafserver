@@ -3,10 +3,12 @@ package internal
 import (
 	"github.com/name5566/leaf/module"
 	"server/base"
-	"server/login"
 )
 
-var skeleton = base.NewSkeleton(login.ChanRPC)
+var (
+	skeleton = base.NewSkeleton()
+	ChanRPC  = skeleton.ChanRPCServer
+)
 
 type Module struct {
 	*module.Skeleton
