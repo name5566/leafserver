@@ -4,9 +4,9 @@ import (
 	"github.com/name5566/leaf"
 	lconf "github.com/name5566/leaf/conf"
 	"server/conf"
-	"server/game"
-	"server/gate"
-	"server/login"
+	game "server/game/internal"
+	gate "server/gate/internal"
+	login "server/login/internal"
 )
 
 func main() {
@@ -14,8 +14,8 @@ func main() {
 	lconf.LogPath = conf.Server.LogPath
 
 	leaf.Run(
-		game.Module,
-		gate.Module,
-		login.Module,
+		new(game.Module),
+		new(gate.Module),
+		new(login.Module),
 	)
 }

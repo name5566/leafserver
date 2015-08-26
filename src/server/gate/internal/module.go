@@ -5,13 +5,9 @@ import (
 	"github.com/name5566/leaf/log"
 	"server/conf"
 	"server/game"
-	"server/gate"
+	_ "server/gate"
 	"server/msg"
 )
-
-func init() {
-	gate.Module = new(Module)
-}
 
 type Module struct {
 	*gate.TCPGate
