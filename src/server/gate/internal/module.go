@@ -9,26 +9,27 @@ import (
 )
 
 type Module struct {
-	*gate.TCPGate
+	*gate.Gate
 }
 
 func (m *Module) OnInit() {
-	m.TCPGate = &gate.TCPGate{
-		Addr:            conf.Server.Addr,
+	m.Gate = &gate.Gate{
 		MaxConnNum:      conf.Server.MaxConnNum,
 		PendingWriteNum: conf.PendingWriteNum,
-		LenMsgLen:       conf.LenMsgLen,
-		MinMsgLen:       conf.MinMsgLen,
 		MaxMsgLen:       conf.MaxMsgLen,
+		WSAddr:          conf.Server.WSAddr,
+		HTTPTimeout:     conf.HTTPTimeout,
+		TCPAddr:         conf.Server.TCPAddr,
+		LenMsgLen:       conf.LenMsgLen,
 		LittleEndian:    conf.LittleEndian,
 		AgentChanRPC:    game.ChanRPC,
 	}
 
 	switch conf.Encoding {
 	case "json":
-		m.TCPGate.JSONProcessor = msg.JSONProcessor
+		m.Gate.JSONProcessor = msg.JSONProcessor
 	case "protobuf":
-		m.TCPGate.ProtobufProcessor = msg.ProtobufProcessor
+		m.Gate.ProtobufProcessor = msg.ProtobufProcessor
 	default:
 		log.Fatal("unknown encoding: %v", conf.Encoding)
 	}

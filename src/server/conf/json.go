@@ -9,7 +9,8 @@ import (
 var Server struct {
 	LogLevel   string
 	LogPath    string
-	Addr       string
+	WSAddr     string
+	TCPAddr    string
 	MaxConnNum int
 }
 

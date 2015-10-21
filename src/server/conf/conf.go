@@ -1,12 +1,16 @@
 package conf
 
+import (
+	"time"
+)
+
 var (
 	// gate conf
 	Encoding               = "json" // "json" or "protobuf"
 	PendingWriteNum        = 2000
-	LenMsgLen              = 2
-	MinMsgLen       uint32 = 2
 	MaxMsgLen       uint32 = 4096
+	HTTPTimeout            = 10 * time.Second
+	LenMsgLen              = 2
 	LittleEndian           = false
 
 	// skeleton conf
