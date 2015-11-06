@@ -2,7 +2,6 @@ package internal
 
 import (
 	"github.com/name5566/leaf/gate"
-	"github.com/name5566/leaf/log"
 	"server/conf"
 	"server/game"
 	"server/msg"
@@ -22,15 +21,7 @@ func (m *Module) OnInit() {
 		TCPAddr:         conf.Server.TCPAddr,
 		LenMsgLen:       conf.LenMsgLen,
 		LittleEndian:    conf.LittleEndian,
+		Processor:       msg.Processor,
 		AgentChanRPC:    game.ChanRPC,
-	}
-
-	switch conf.Encoding {
-	case "json":
-		m.Gate.JSONProcessor = msg.JSONProcessor
-	case "protobuf":
-		m.Gate.ProtobufProcessor = msg.ProtobufProcessor
-	default:
-		log.Fatal("unknown encoding: %v", conf.Encoding)
 	}
 }

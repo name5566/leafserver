@@ -1,14 +1,10 @@
 package msg
 
 import (
-	"github.com/name5566/leaf/network/json"
-	"github.com/name5566/leaf/network/protobuf"
+	"github.com/name5566/leaf/network"
 )
 
-var (
-	JSONProcessor     = json.NewProcessor()
-	ProtobufProcessor = protobuf.NewProcessor()
-)
+var Processor network.Processor
 
 func init() {
 
