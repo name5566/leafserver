@@ -12,6 +12,7 @@ import (
 func main() {
 	lconf.LogLevel = conf.Server.LogLevel
 	lconf.LogPath = conf.Server.LogPath
+	lconf.ConsolePort = conf.Server.ConsolePort
 
 	leaf.Run(
 		game.Module,
