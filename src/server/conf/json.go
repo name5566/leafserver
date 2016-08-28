@@ -13,6 +13,7 @@ var Server struct {
 	TCPAddr     string
 	MaxConnNum  int
 	ConsolePort int
+	ProfilePath string
 }
 
 func init() {
