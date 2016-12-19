@@ -1,10 +1,14 @@
 package conf
 
 import (
+	"log"
 	"time"
 )
 
 var (
+	// log conf
+	LogFlag = log.LstdFlags
+
 	// gate conf
 	PendingWriteNum        = 2000
 	MaxMsgLen       uint32 = 4096
