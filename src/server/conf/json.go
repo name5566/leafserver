@@ -17,7 +17,7 @@ var Server struct {
 	ConsolePort 	int
 	ProfilePath 	string
 	ServerName		string
-	ListenAddrs     []string
+	ListenAddr     	string
 	ConnAddrs       []string
 	PendingWriteNum int
 }

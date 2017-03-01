@@ -17,7 +17,7 @@ func main() {
 	lconf.ConsolePort = conf.Server.ConsolePort
 	lconf.ProfilePath = conf.Server.ProfilePath
 	lconf.ServerName = conf.Server.ServerName
-	lconf.ListenAddrs = conf.Server.ListenAddrs
+	lconf.ListenAddr = conf.Server.ListenAddr
 	lconf.ConnAddrs = conf.Server.ConnAddrs
 	lconf.PendingWriteNum = conf.Server.PendingWriteNum
 
