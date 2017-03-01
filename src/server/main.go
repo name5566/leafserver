@@ -7,6 +7,7 @@ import (
 	"server/game"
 	"server/gate"
 	"server/login"
+	"server/cluster"
 )
 
 func main() {
@@ -15,6 +16,12 @@ func main() {
 	lconf.LogFlag = conf.LogFlag
 	lconf.ConsolePort = conf.Server.ConsolePort
 	lconf.ProfilePath = conf.Server.ProfilePath
+	lconf.ServerName = conf.Server.ServerName
+	lconf.ListenAddrs = conf.Server.ListenAddrs
+	lconf.ConnAddrs = conf.Server.ConnAddrs
+	lconf.PendingWriteNum = conf.Server.PendingWriteNum
+
+	cluster.Init()
 
 	leaf.Run(
 		game.Module,
