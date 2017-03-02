@@ -5,6 +5,6 @@
 	"MaxConnNum": 20000,
 
 	"ServerName":"game",
-	"ListenAddrs":["localhost:32017"],
+	"ListenAddr":"localhost:32017",
 	"PendingWriteNum":100
 }
