@@ -1,26 +1,29 @@
 package internal
 
 import (
-	"server/msg"
-	"github.com/name5566/leaf/cluster"
 	"github.com/name5566/leaf/log"
-	"github.com/name5566/leaf/conf"
-	"reflect"
 )
 
-func handleTest(args []interface{}) {
-	recvMsg := args[0].(*msg.S2S_Test)
-	agent := args[1].(*cluster.Agent)
-	log.Debug("msgServerName:%v agentServerName:%v", recvMsg.ServerName, agent.ServerName)
-
-	sendMsg := &msg.S2S_Test{ServerName:conf.ServerName}
-	agent.WriteMsg(sendMsg)
-}
-
-func handleMsg(m interface{}, h interface{}) {
-	skeleton.RegisterChanRPC(reflect.TypeOf(m), h)
-}
-
 func init() {
-	handleMsg(&msg.S2S_Test{}, handleTest)
+	ChanRPC.Register("f0", func(args []interface{}) (err error) {
+		log.Debug("f0 is call")
+		return
+	})
+
+	ChanRPC.Register("f1", func(args []interface{}) (interface{}, error) {
+		log.Debug("f1 is call")
+		return 1, nil
+	})
+
+	ChanRPC.Register("fn", func(args []interface{}) ([]interface{}, error) {
+		log.Debug("fn is call")
+		return []interface{}{1, 2, 3}, nil
+	})
+
+	ChanRPC.Register("add", func(args []interface{}) (interface{}, error) {
+		log.Debug("add is call")
+		n1 := int(args[0])
+		n2 := int(args[1])
+		return n1 + n2, nil
+	})
 }
