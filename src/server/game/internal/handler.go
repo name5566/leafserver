@@ -22,8 +22,8 @@ func init() {
 
 	ChanRPC.Register("add", func(args []interface{}) (interface{}, error) {
 		log.Debug("add is call")
-		n1 := int(args[0])
-		n2 := int(args[1])
+		n1 := args[0].(float64)
+		n2 := args[1].(float64)
 		return n1 + n2, nil
 	})
 }

@@ -24,75 +24,67 @@ func handleTest(args []interface{}) {
 	agent.WriteMsg(sendMsg)
 }
 
-func rpcTest(agent *cluster.Agent, chanAsynRet chan *chanrpc.RetInfo)  {
+func rpcTest(chanAsynRet chan *chanrpc.RetInfo)  {
 	// sync
-	err := agent.Call0("f0")
+	err := cluster.Call0("game", "f0")
 	if err != nil {
 		fmt.Println(err)
 	}
-	time.Sleep(time.Second)
 
-	r1, err := agent.Call1("f1")
+	r1, err := cluster.Call1("game", "f1")
 	if err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println(r1)
 	}
-	time.Sleep(time.Second)
 
-	rn, err := agent.CallN("fn")
+	rn, err := cluster.CallN("game", "fn")
 	if err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println(rn[0], rn[1], rn[2])
 	}
-	time.Sleep(time.Second)
 
-	ra, err := agent.Call1("add", 1, 2)
+	ra, err := cluster.Call1("game", "add", 1, 2)
 	if err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println(ra)
 	}
-	time.Sleep(time.Second)
 
 	// asyn
-	agent.AsynCall(chanAsynRet, "f0", func(err error) {
+	cluster.AsynCall("game", chanAsynRet, "f0", func(err error) {
 		if err != nil {
 			fmt.Println(err)
 		}
 	})
-	time.Sleep(time.Second)
 
-	agent.AsynCall(chanAsynRet, "f1", func(ret interface{}, err error) {
+	cluster.AsynCall("game", chanAsynRet, "f1", func(ret interface{}, err error) {
 		if err != nil {
 			fmt.Println(err)
 		} else {
 			fmt.Println(ret)
 		}
 	})
-	time.Sleep(time.Second)
 
-	agent.AsynCall(chanAsynRet, "fn", func(ret []interface{}, err error) {
+	cluster.AsynCall("game", chanAsynRet, "fn", func(ret []interface{}, err error) {
 		if err != nil {
 			fmt.Println(err)
 		} else {
 			fmt.Println(ret[0], ret[1], ret[2])
 		}
 	})
-	time.Sleep(time.Second)
 
-	agent.AsynCall(chanAsynRet, "add", 1, 2, func(ret interface{}, err error) {
+	cluster.AsynCall("game", chanAsynRet, "add", 1, 2, func(ret interface{}, err error) {
 		if err != nil {
 			fmt.Println(err)
 		} else {
 			fmt.Println(ret)
 		}
 	})
-	time.Sleep(time.Second)
 
 	// go
-	agent.Go("f0")
+	cluster.Go("game", "f0")
 }
 
 func main() {
@@ -102,11 +94,10 @@ func main() {
 	cluster.Init()
 
 	time.Sleep(time.Second * 2)
-	agent := cluster.GetAgent("game")
 
 	closeSig := make(chan bool)
 	skeleton := base.NewSkeleton()
 
-	go rpcTest(agent, skeleton.GetChanAsynRet())
+	go rpcTest(skeleton.GetChanAsynRet())
 	skeleton.Run(closeSig)
 }
