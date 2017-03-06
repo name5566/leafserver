@@ -6,5 +6,5 @@
 
 	"ServerName":"game",
 	"ListenAddr":"localhost:32017",
-	"PendingWriteNum":100
+	"PendingWriteNum":1000
 }

@@ -3,7 +3,8 @@ package main
 import (
 	"github.com/name5566/leaf/cluster"
 	"github.com/name5566/leaf/log"
-	"github.com/name5566/leaf/conf"
+	lconf "github.com/name5566/leaf/conf"
+	"client/conf"
 	"time"
 	"server/base"
 	"fmt"
@@ -20,7 +21,7 @@ func handleTest(args []interface{}) {
 	log.Debug("msgServerName:%v agentServerName:%v", msg.ServerName, agent.ServerName)
 
 	time.Sleep(time.Second)
-	sendMsg := &S2S_Test{ServerName:conf.ServerName}
+	sendMsg := &S2S_Test{ServerName:lconf.ServerName}
 	agent.WriteMsg(sendMsg)
 }
 
@@ -97,12 +98,30 @@ func rpcTest(chanAsynRet chan *chanrpc.RetInfo)  {
 
 	time.Sleep(time.Second)
 	printRequestCount()
+
+	qpsTest := func() {
+		for {
+			cluster.Call1("game", "qpsTest")
+		}
+
+	}
+	for i := 0; i < 1000; i++ {
+		go qpsTest()
+	}
 }
 
 func main() {
-	conf.ServerName = "client"
-	conf.ConnAddrs = []string {"localhost:32017"}
-	conf.HeartBeatInterval = 11 //故意让心跳太久，使得game server能自动测试并断线重连
+	lconf.LogLevel = conf.Server.LogLevel
+	lconf.LogPath = conf.Server.LogPath
+	lconf.LogFlag = conf.LogFlag
+	lconf.ConsolePort = conf.Server.ConsolePort
+	lconf.ProfilePath = conf.Server.ProfilePath
+	lconf.ServerName = conf.Server.ServerName
+	lconf.ListenAddr = conf.Server.ListenAddr
+	lconf.ConnAddrs = conf.Server.ConnAddrs
+	lconf.PendingWriteNum = conf.Server.PendingWriteNum
+
+	//conf.HeartBeatInterval = 11 //故意让心跳太久，使得game server能自动测试并断线重连
 	cluster.Processor.SetHandler(&S2S_Test{}, handleTest)
 	cluster.Init()
 

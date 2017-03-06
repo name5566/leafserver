@@ -13,4 +13,5 @@ func Init()  {
 	cluster.SetRoute("f1", game.ChanRPC)
 	cluster.SetRoute("fn", game.ChanRPC)
 	cluster.SetRoute("add", game.ChanRPC)
+	cluster.SetRoute("qpsTest", game.ChanRPC)
 }

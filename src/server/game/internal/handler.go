@@ -2,6 +2,12 @@ package internal
 
 import (
 	"github.com/name5566/leaf/log"
+	"time"
+)
+
+var (
+	lastTime = time.Now().Unix()
+	qps      = 0
 )
 
 func init() {
@@ -25,5 +31,16 @@ func init() {
 		n1 := args[0].(float64)
 		n2 := args[1].(float64)
 		return n1 + n2, nil
+	})
+
+	ChanRPC.Register("qpsTest", func(args []interface{}) (interface{}, error) {
+		qps += 1
+		curTime := time.Now().Unix()
+		if curTime - lastTime >= 1 {
+			log.Debug("qps %v", qps)
+			qps = 0
+			lastTime = curTime
+		}
+		return nil, nil
 	})
 }
