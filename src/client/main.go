@@ -52,12 +52,17 @@ func rpcTest(chanAsynRet chan *chanrpc.RetInfo)  {
 		fmt.Println(ra)
 	}
 
+	printRequestCount := func() {
+		fmt.Printf("request count %v\n", cluster.GetRequestCount())
+	}
+
 	// asyn
 	cluster.AsynCall("game", chanAsynRet, "f0", func(err error) {
 		if err != nil {
 			fmt.Println(err)
 		}
 	})
+	printRequestCount()
 
 	cluster.AsynCall("game", chanAsynRet, "f1", func(ret interface{}, err error) {
 		if err != nil {
@@ -66,6 +71,7 @@ func rpcTest(chanAsynRet chan *chanrpc.RetInfo)  {
 			fmt.Println(ret)
 		}
 	})
+	printRequestCount()
 
 	cluster.AsynCall("game", chanAsynRet, "fn", func(ret []interface{}, err error) {
 		if err != nil {
@@ -74,6 +80,7 @@ func rpcTest(chanAsynRet chan *chanrpc.RetInfo)  {
 			fmt.Println(ret[0], ret[1], ret[2])
 		}
 	})
+	printRequestCount()
 
 	cluster.AsynCall("game", chanAsynRet, "add", 1, 2, func(ret interface{}, err error) {
 		if err != nil {
@@ -82,14 +89,20 @@ func rpcTest(chanAsynRet chan *chanrpc.RetInfo)  {
 			fmt.Println(ret)
 		}
 	})
+	printRequestCount()
 
 	// go
 	cluster.Go("game", "f0")
+	printRequestCount()
+
+	time.Sleep(time.Second)
+	printRequestCount()
 }
 
 func main() {
 	conf.ServerName = "client"
 	conf.ConnAddrs = []string {"localhost:32017"}
+	conf.HeartBeatInterval = 11 //故意让心跳太久，使得game server能自动测试并断线重连
 	cluster.Processor.SetHandler(&S2S_Test{}, handleTest)
 	cluster.Init()
 
