@@ -122,6 +122,7 @@ func main() {
 	lconf.PendingWriteNum = conf.Server.PendingWriteNum
 
 	//conf.HeartBeatInterval = 11 //故意让心跳太久，使得game server能自动测试并断线重连
+	cluster.Processor.Register(&S2S_Test{})
 	cluster.Processor.SetHandler(&S2S_Test{}, handleTest)
 	cluster.Init()
 

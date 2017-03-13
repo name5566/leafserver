@@ -3,6 +3,6 @@
 	"LogPath": "",
 
 	"ServerName":"client",
-	"ConnAddrs":["localhost:32017"],
+	"ConnAddrs":{"game":"localhost:32017"},
 	"PendingWriteNum":1000
 }

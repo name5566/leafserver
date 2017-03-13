@@ -7,6 +7,7 @@ import (
 )
 
 func Init()  {
+	cluster.Processor.Register(&msg.S2S_Test{})
 	cluster.Processor.SetRouter(&msg.S2S_Test{}, game.ChanRPC)
 
 	cluster.SetRoute("f0", game.ChanRPC)
