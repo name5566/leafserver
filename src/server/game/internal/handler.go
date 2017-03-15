@@ -41,6 +41,6 @@ func init() {
 			qps = 0
 			lastTime = curTime
 		}
-		return nil, nil
+		return args[0], nil
 	})
 }

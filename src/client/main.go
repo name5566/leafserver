@@ -99,9 +99,14 @@ func rpcTest(chanAsynRet chan *chanrpc.RetInfo)  {
 	time.Sleep(time.Second)
 	printRequestCount()
 
+	testData := "sadfasfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" +
+		"sssssssssssskljkljkljfldasflaslflasflkdsajlkfasjdfjklsadklflsadfljlasdfasjkflsdjafjksaldflasdlfjssafgdagkjl" +
+		"lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll" +
+		"llllllllllllllllllllllllllllsadfdaslfjdsjflasdjfklajsd;klfjksdlafjsdafpopasifweajrklfdjfkjlsadkjlfa;os;rsajl" +
+		"fjkl;asdklfjksdaklfsaj;lfweoirjseajif"
 	qpsTest := func() {
 		for {
-			cluster.Call1("game", "qpsTest")
+			cluster.Call1("game", "qpsTest", testData)
 		}
 
 	}
