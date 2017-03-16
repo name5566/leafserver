@@ -6,6 +6,10 @@ import (
 
 var Processor network.Processor
 
+type S2S_Test struct {
+	ServerName	string
+}
+
 func init() {
 
 }

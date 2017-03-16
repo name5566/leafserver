@@ -7,15 +7,19 @@ import (
 )
 
 var Server struct {
-	LogLevel    string
-	LogPath     string
-	WSAddr      string
-	CertFile    string
-	KeyFile     string
-	TCPAddr     string
-	MaxConnNum  int
-	ConsolePort int
-	ProfilePath string
+	LogLevel    	string
+	LogPath     	string
+	WSAddr      	string
+	CertFile    	string
+	KeyFile     	string
+	TCPAddr     	string
+	MaxConnNum  	int
+	ConsolePort 	int
+	ProfilePath 	string
+	ServerName		string
+	ListenAddr     	string
+	ConnAddrs       map[string]string
+	PendingWriteNum int
 }
 
 func init() {

@@ -2,5 +2,9 @@
 	"LogLevel": "debug",
 	"LogPath": "",
 	"TCPAddr": "127.0.0.1:3563",
-	"MaxConnNum": 20000
+	"MaxConnNum": 20000,
+
+	"ServerName":"game",
+	"ListenAddr":"localhost:32017",
+	"PendingWriteNum":1000
 }
