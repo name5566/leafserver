@@ -8,6 +8,7 @@ import (
 
 var Server struct {
 	LogLevel    string
+	LogStack    bool
 	LogPath     string
 	WSAddr      string
 	CertFile    string

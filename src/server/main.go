@@ -11,6 +11,7 @@ import (
 
 func main() {
 	lconf.LogLevel = conf.Server.LogLevel
+	lconf.LogStack = conf.Server.LogStack
 	lconf.LogPath = conf.Server.LogPath
 	lconf.LogFlag = conf.LogFlag
 	lconf.ConsolePort = conf.Server.ConsolePort
